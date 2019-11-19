@@ -3,6 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 from PIL import Image
 import pandas as pd
+import sys
 
 
 def filter_contours(contours,min_radius,max_radius):
@@ -34,15 +35,15 @@ def preprocess_image(cv_img):
 	
 def identify_black_pucks(img):
     th, threshed = cv2.threshold(img, 100, 255, cv2.THRESH_OTSU|cv2.THRESH_BINARY)
-    return(filter_contours(make_contours(threshed),10,30))
+    return(filter_contours(make_contours(threshed),10,50))
     
 def identify_white_pucks(img):
     th, threshed = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY)
-    return(filter_contours(make_contours(threshed),10,30))
+    return(filter_contours(make_contours(threshed),10,50))
 
 def identify_striker(img):
     th, threshed = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY)
-    return(filter_contours(make_contours(threshed),30,40))
+    return(filter_contours(make_contours(threshed),30,50))
 
 def find_pucks(location):
     img = Image.open(location)
@@ -58,7 +59,10 @@ def find_pucks(location):
 
         
 if __name__ ==  "__main__":
-    location = "../data/crop.jpg"
+    #To do: Crop the carrom board better and automatically
+    #To do: Improve puck identification
+    #To do: Add video data
+    location = sys.argv[1] #"../data/crop.jpg"
     find_pucks(location)
 
 	
