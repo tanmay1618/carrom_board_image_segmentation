@@ -35,11 +35,11 @@ def preprocess_image(cv_img):
 	
 def identify_black_pucks(img):
     th, threshed = cv2.threshold(img, 100, 255, cv2.THRESH_OTSU|cv2.THRESH_BINARY)
-    return(filter_contours(make_contours(threshed),10,50))
+    return(filter_contours(make_contours(threshed),10,30))
     
 def identify_white_pucks(img):
     th, threshed = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY)
-    return(filter_contours(make_contours(threshed),10,50))
+    return(filter_contours(make_contours(threshed),10,30))
 
 def identify_striker(img):
     th, threshed = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY)
@@ -59,9 +59,12 @@ def find_pucks(location):
 
         
 if __name__ ==  "__main__":
-    #To do: Crop the carrom board better and automatically
-    #To do: Improve puck identification
-    #To do: Add video data
+    #Done : v0.5 : Identify different pucks
+    #To do: v1.0 : Add video data
+    #To do: v1.5 : Crop the carrom board better and automatically
+    #To do: v2.0 : Improve puck identification
+    #To do: v3.0 : Add support for side view
+    #To do: v3.0 : Add support for other carrom boards
     location = sys.argv[1] #"../data/crop.jpg"
     find_pucks(location)
 
